@@ -1,41 +1,41 @@
 {
   "TechyTechy#1747": {
     "correct_streak": 0,
-    "generated": false,
-    "answer": "이케다치토세",
-    "reward": 32,
-    "question": "이ㅋㄷㅊㅌㅅ",
+    "generated": true,
+    "answer": "미나미다타이시",
+    "reward": 34,
+    "question": "ㅁ나미다ㅌㅇㅅ",
     "theme": "",
     "win": 26,
     "lose": 145,
     "set_theme": "random",
-    "generated_time": 1548824235,
-    "question_theme": "유루유리",
+    "generated_time": 1548839590,
+    "question_theme": "하이큐!!",
     "set_command_prefix": "ㅎ"
   },
   "Arialily#1361": {
     "correct_streak": 0,
     "generated": false,
-    "answer": "여곡성",
-    "reward": 27,
-    "question": "ㅇ곡ㅅ",
-    "win": 24,
-    "lose": 59,
+    "answer": "귀등의섬",
+    "reward": 28,
+    "question": "ㄱㄷㅇ섬",
+    "win": 25,
+    "lose": 64,
     "set_theme": "random",
-    "generated_time": 1548828172,
-    "question_theme": "한국 영화",
+    "generated_time": 1548855853,
+    "question_theme": "만화/애니메이션",
     "set_command_prefix": ";"
   },
   "슈카#0638": {
     "correct_streak": 0,
     "generated": false,
-    "answer": "뽀록나",
-    "reward": 26,
-    "question": "뽀ㄹㄴ",
+    "answer": "페르시온",
+    "reward": 28,
+    "question": "ㅍㄹㅅㅇ",
     "win": 533,
     "lose": 1399,
     "set_theme": "포켓몬스터",
-    "generated_time": 1548825173,
+    "generated_time": 1548857405,
     "question_theme": "포켓몬스터",
     "set_command_prefix": ";"
   },
@@ -48,7 +48,8 @@
     "win": 0,
     "lose": 2,
     "set_theme": "random",
-    "generated_time": 1548618386
+    "generated_time": 1548618386,
+    "set_command_prefix": ";"
   },
   "OddEye#5782": {
     "correct_streak": 1,
@@ -75,28 +76,29 @@
     "generated_time": 1548631006
   },
   "Rusurua#0669": {
-    "correct_streak": 1,
+    "correct_streak": 0,
     "generated": false,
-    "answer": "엑셀사가",
-    "reward": 28,
-    "question": "ㅇㅅㅅㄱ",
+    "answer": "팬티앤스타킹위드가터벨트",
+    "reward": 15,
+    "question": "ㅍ티ㅇㅅㅌㅋㅇㄷㄱㅌㅂㅌ",
     "win": 9,
-    "lose": 330,
+    "lose": 331,
     "set_theme": "random",
-    "generated_time": 1548731671,
-    "question_theme": "만화/애니메이션"
+    "generated_time": 1548845291,
+    "question_theme": "만화/애니메이션",
+    "set_command_prefix": ";"
   },
   "Yangot#1861": {
     "correct_streak": 0,
     "generated": false,
-    "answer": "빨라쪼믹스베리",
+    "answer": "페르시아의왕자",
     "reward": 34,
-    "question": "ㅃ라ㅉ믹ㅅㅂㄹ",
+    "question": "ㅍㄹㅅㅇ의왕ㅈ",
     "win": 75,
-    "lose": 311,
+    "lose": 313,
     "set_theme": "random",
-    "generated_time": 1548822427,
-    "question_theme": "라면/과자",
+    "generated_time": 1548859208,
+    "question_theme": "모바일 게임",
     "set_command_prefix": "!"
   },
   "SonReasha#1317": {
@@ -108,18 +110,19 @@
     "win": 6,
     "lose": 130,
     "set_theme": "random",
-    "generated_time": 1548656058
+    "generated_time": 1548656058,
+    "set_command_prefix": ";"
   },
   "개대용#0819": {
     "correct_streak": 0,
-    "generated": true,
-    "answer": "신이문역",
-    "reward": 28,
-    "question": "ㅅㅇ문ㅇ",
-    "win": 107,
-    "lose": 446,
+    "generated": false,
+    "answer": "인천논현역",
+    "reward": 30,
+    "question": "ㅇㅊ논ㅎㅇ",
+    "win": 115,
+    "lose": 504,
     "set_theme": "random",
-    "generated_time": 1548759753,
+    "generated_time": 1548855417,
     "question_theme": "대한민국 철도역",
     "set_command_prefix": ";"
   },
@@ -133,7 +136,8 @@
     "lose": 107,
     "set_theme": "random",
     "generated_time": 1548760764,
-    "question_theme": "국내 방송 프로그램"
+    "question_theme": "국내 방송 프로그램",
+    "set_command_prefix": ";"
   },
   "피파포폼#8065": {
     "correct_streak": 0,
@@ -158,7 +162,8 @@
     "lose": 123,
     "set_theme": "random",
     "generated_time": 1548781408,
-    "question_theme": "대한민국 철도역"
+    "question_theme": "대한민국 철도역",
+    "set_command_prefix": ";"
   },
   "순호#9816": {
     "correct_streak": 1,
@@ -195,19 +200,20 @@
     "lose": 39,
     "set_theme": "random",
     "generated_time": 1548779148,
-    "question_theme": "라이트 노벨"
+    "question_theme": "라이트 노벨",
+    "set_command_prefix": ";"
   },
   "클라리스#6361": {
     "correct_streak": 0,
     "generated": false,
-    "answer": "홈런볼슈",
+    "answer": "격애하렘",
     "reward": 28,
-    "question": "홈ㄹ볼ㅅ",
-    "win": 43,
-    "lose": 129,
+    "question": "ㄱㅇ하ㄹ",
+    "win": 48,
+    "lose": 145,
     "set_theme": "random",
-    "generated_time": 1548779151,
-    "question_theme": "라면/과자",
+    "generated_time": 1548865431,
+    "question_theme": "라이트 노벨",
     "set_command_prefix": ";"
   }
 }
