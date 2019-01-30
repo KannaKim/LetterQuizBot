@@ -1,0 +1,58 @@
+{
+  "TechyTechy#1747": {
+    "correct_streak": 0,
+    "generated": false,
+    "answer": "신논현역",
+    "reward": 28,
+    "question": "ㅅㄴㅎㅇ",
+    "theme": "",
+    "win": 8,
+    "lose": 29,
+    "set_theme": "THE iDOLM@STER",
+    "generated_time": 1548617074
+  },
+  "Arialily#1361": {
+    "correct_streak": 0,
+    "generated": false,
+    "answer": "함대신호소",
+    "reward": 33,
+    "question": "ㅎㄷㅅㅎㅅ",
+    "win": 3,
+    "lose": 16,
+    "set_theme": "스타크래프트",
+    "generated_time": 1548620421
+  },
+  "슈카#0638": {
+    "correct_streak": 0,
+    "generated": false,
+    "answer": "무우마직",
+    "reward": 28,
+    "question": "ㅁㅇㅁㅈ",
+    "win": 61,
+    "lose": 292,
+    "set_theme": "random",
+    "generated_time": 1548622341
+  },
+  "Akina#3364": {
+    "correct_streak": 0,
+    "generated": false,
+    "answer": "직산역",
+    "reward": 46,
+    "question": "ㅈㅅㅇ",
+    "win": 0,
+    "lose": 2,
+    "set_theme": "random",
+    "generated_time": 1548618386
+  },
+  "OddEye#5782": {
+    "correct_streak": 0,
+    "generated": false,
+    "answer": "프테라",
+    "reward": 26,
+    "question": "ㅍㅌㄹ",
+    "win": 0,
+    "lose": 9,
+    "set_theme": "random",
+    "generated_time": 1548622546
+  }
+}

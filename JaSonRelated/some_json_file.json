@@ -1,0 +1,19 @@
+{
+  "name": "John",
+  "age": 13,
+  "hobby": [
+    "soccer",
+    "LOL",
+    "basketball"
+  ] ,
+
+
+  "exclude": [
+    "**/bin",
+    "**/bower_components",
+    "**/jspm_packages",
+    "**/node_modules",
+    "**/obj",
+    "**/platforms"
+  ]
+}
