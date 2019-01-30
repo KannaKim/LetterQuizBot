@@ -1,0 +1,17 @@
+C:\Users\barkd\source\repos\LetterQuizBot\Test.LetterQuizBot\obj\Debug\netcoreapp2.1\Test.LetterQuizBot.csprojAssemblyReference.cache
+C:\Users\barkd\source\repos\LetterQuizBot\Test.LetterQuizBot\obj\Debug\netcoreapp2.1\Test.LetterQuizBot.csproj.CoreCompileInputs.cache
+C:\Users\barkd\source\repos\LetterQuizBot\Test.LetterQuizBot\obj\Debug\netcoreapp2.1\Test.LetterQuizBot.AssemblyInfoInputs.cache
+C:\Users\barkd\source\repos\LetterQuizBot\Test.LetterQuizBot\obj\Debug\netcoreapp2.1\Test.LetterQuizBot.AssemblyInfo.cs
+C:\Users\barkd\source\repos\LetterQuizBot\Test.LetterQuizBot\bin\Debug\netcoreapp2.1\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+C:\Users\barkd\source\repos\LetterQuizBot\Test.LetterQuizBot\bin\Debug\netcoreapp2.1\xunit.runner.reporters.netcoreapp10.dll
+C:\Users\barkd\source\repos\LetterQuizBot\Test.LetterQuizBot\bin\Debug\netcoreapp2.1\xunit.runner.utility.netcoreapp10.dll
+C:\Users\barkd\source\repos\LetterQuizBot\Test.LetterQuizBot\bin\Debug\netcoreapp2.1\Test.LetterQuizBot.deps.json
+C:\Users\barkd\source\repos\LetterQuizBot\Test.LetterQuizBot\bin\Debug\netcoreapp2.1\Test.LetterQuizBot.runtimeconfig.json
+C:\Users\barkd\source\repos\LetterQuizBot\Test.LetterQuizBot\bin\Debug\netcoreapp2.1\Test.LetterQuizBot.runtimeconfig.dev.json
+C:\Users\barkd\source\repos\LetterQuizBot\Test.LetterQuizBot\bin\Debug\netcoreapp2.1\Test.LetterQuizBot.dll
+C:\Users\barkd\source\repos\LetterQuizBot\Test.LetterQuizBot\bin\Debug\netcoreapp2.1\LetterQuizBot.dll
+C:\Users\barkd\source\repos\LetterQuizBot\Test.LetterQuizBot\obj\Debug\netcoreapp2.1\Test.LetterQuizBot.csproj.CopyComplete
+C:\Users\barkd\source\repos\LetterQuizBot\Test.LetterQuizBot\bin\Debug\netcoreapp2.1\Test.LetterQuizBot.pdb
+C:\Users\barkd\source\repos\LetterQuizBot\Test.LetterQuizBot\obj\Debug\netcoreapp2.1\Test.LetterQuizBot.dll
+C:\Users\barkd\source\repos\LetterQuizBot\Test.LetterQuizBot\obj\Debug\netcoreapp2.1\Test.LetterQuizBot.pdb
+C:\Users\barkd\source\repos\LetterQuizBot\Test.LetterQuizBot\bin\Debug\netcoreapp2.1\LetterQuizBot.pdb

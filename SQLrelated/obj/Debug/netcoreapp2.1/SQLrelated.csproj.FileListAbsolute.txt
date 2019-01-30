@@ -1,0 +1,11 @@
+C:\Users\barkd\source\repos\LetterQuizBot\SQLrelated\bin\Debug\netcoreapp2.1\SQLrelated.deps.json
+C:\Users\barkd\source\repos\LetterQuizBot\SQLrelated\bin\Debug\netcoreapp2.1\SQLrelated.runtimeconfig.json
+C:\Users\barkd\source\repos\LetterQuizBot\SQLrelated\bin\Debug\netcoreapp2.1\SQLrelated.runtimeconfig.dev.json
+C:\Users\barkd\source\repos\LetterQuizBot\SQLrelated\bin\Debug\netcoreapp2.1\SQLrelated.dll
+C:\Users\barkd\source\repos\LetterQuizBot\SQLrelated\bin\Debug\netcoreapp2.1\SQLrelated.pdb
+C:\Users\barkd\source\repos\LetterQuizBot\SQLrelated\obj\Debug\netcoreapp2.1\SQLrelated.csprojAssemblyReference.cache
+C:\Users\barkd\source\repos\LetterQuizBot\SQLrelated\obj\Debug\netcoreapp2.1\SQLrelated.csproj.CoreCompileInputs.cache
+C:\Users\barkd\source\repos\LetterQuizBot\SQLrelated\obj\Debug\netcoreapp2.1\SQLrelated.AssemblyInfoInputs.cache
+C:\Users\barkd\source\repos\LetterQuizBot\SQLrelated\obj\Debug\netcoreapp2.1\SQLrelated.AssemblyInfo.cs
+C:\Users\barkd\source\repos\LetterQuizBot\SQLrelated\obj\Debug\netcoreapp2.1\SQLrelated.dll
+C:\Users\barkd\source\repos\LetterQuizBot\SQLrelated\obj\Debug\netcoreapp2.1\SQLrelated.pdb
