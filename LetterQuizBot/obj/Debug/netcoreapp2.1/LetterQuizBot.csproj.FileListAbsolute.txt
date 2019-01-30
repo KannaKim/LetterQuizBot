@@ -1,0 +1,11 @@
+C:\Users\barkd\source\repos\LetterQuizBot\LetterQuizBot\bin\Debug\netcoreapp2.1\LetterQuizBot.deps.json
+C:\Users\barkd\source\repos\LetterQuizBot\LetterQuizBot\bin\Debug\netcoreapp2.1\LetterQuizBot.runtimeconfig.json
+C:\Users\barkd\source\repos\LetterQuizBot\LetterQuizBot\bin\Debug\netcoreapp2.1\LetterQuizBot.runtimeconfig.dev.json
+C:\Users\barkd\source\repos\LetterQuizBot\LetterQuizBot\bin\Debug\netcoreapp2.1\LetterQuizBot.dll
+C:\Users\barkd\source\repos\LetterQuizBot\LetterQuizBot\obj\Debug\netcoreapp2.1\LetterQuizBot.csprojAssemblyReference.cache
+C:\Users\barkd\source\repos\LetterQuizBot\LetterQuizBot\obj\Debug\netcoreapp2.1\LetterQuizBot.csproj.CoreCompileInputs.cache
+C:\Users\barkd\source\repos\LetterQuizBot\LetterQuizBot\obj\Debug\netcoreapp2.1\LetterQuizBot.AssemblyInfoInputs.cache
+C:\Users\barkd\source\repos\LetterQuizBot\LetterQuizBot\obj\Debug\netcoreapp2.1\LetterQuizBot.AssemblyInfo.cs
+C:\Users\barkd\source\repos\LetterQuizBot\LetterQuizBot\bin\Debug\netcoreapp2.1\LetterQuizBot.pdb
+C:\Users\barkd\source\repos\LetterQuizBot\LetterQuizBot\obj\Debug\netcoreapp2.1\LetterQuizBot.dll
+C:\Users\barkd\source\repos\LetterQuizBot\LetterQuizBot\obj\Debug\netcoreapp2.1\LetterQuizBot.pdb

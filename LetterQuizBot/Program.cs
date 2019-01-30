@@ -1,0 +1,58 @@
+﻿using System;
+using System.IO;
+using System.Net.NetworkInformation;
+using System.Threading.Tasks;
+using Discord;
+using Discord.WebSocket;
+using Discord.Commands;
+using Microsoft.Extensions.DependencyInjection;
+
+
+namespace LetterQuizBot
+{
+    class Program : ModuleBase<SocketCommandContext>
+    {
+        public static void Main(string[] args) => new Program().MainAsync().GetAwaiter().GetResult();
+
+
+        private async Task MainAsync()
+        {
+            Directory.SetCurrentDirectory(Path.Join("..","..",".."));
+            Console.WriteLine("Working Directory: {0}",Directory.GetCurrentDirectory());
+            using (var services = ConfigureServices())
+            {
+                var client = services.GetRequiredService<DiscordSocketClient>();
+                await client.SetGameAsync($"명령어를 보려면\t{SensitiveData.CommandPrefix}도움말");
+                client.Log += LogAsync;
+                services.GetRequiredService<CommandService>().Log += LogAsync;
+                
+
+                await client.LoginAsync(TokenType.Bot, SensitiveData.Token);
+                await client.StartAsync();
+                await services.GetRequiredService<CommandHandler>().InitializeAsnyc();
+
+
+                await Task.Delay(-1);
+            }
+            
+        }
+
+        private ServiceProvider ConfigureServices()
+        {
+            ServiceCollection services = new ServiceCollection();
+            services.AddSingleton<DiscordSocketClient>();
+            services.AddSingleton<CommandService>();
+            services.AddSingleton<CommandHandler>();
+            return services.BuildServiceProvider();
+        }
+
+        private Task LogAsync(LogMessage log)
+        {
+            Console.WriteLine(log.ToString());
+            return Task.CompletedTask;
+        }
+
+
+    }
+
+}

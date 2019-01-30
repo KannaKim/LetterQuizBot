@@ -1,0 +1,11 @@
+C:\Users\barkd\source\repos\LetterQuizBot\SomeProgram\bin\Debug\netcoreapp2.1\SomeProgram.deps.json
+C:\Users\barkd\source\repos\LetterQuizBot\SomeProgram\bin\Debug\netcoreapp2.1\SomeProgram.runtimeconfig.json
+C:\Users\barkd\source\repos\LetterQuizBot\SomeProgram\bin\Debug\netcoreapp2.1\SomeProgram.runtimeconfig.dev.json
+C:\Users\barkd\source\repos\LetterQuizBot\SomeProgram\bin\Debug\netcoreapp2.1\SomeProgram.dll
+C:\Users\barkd\source\repos\LetterQuizBot\SomeProgram\bin\Debug\netcoreapp2.1\SomeProgram.pdb
+C:\Users\barkd\source\repos\LetterQuizBot\SomeProgram\obj\Debug\netcoreapp2.1\SomeProgram.csprojAssemblyReference.cache
+C:\Users\barkd\source\repos\LetterQuizBot\SomeProgram\obj\Debug\netcoreapp2.1\SomeProgram.csproj.CoreCompileInputs.cache
+C:\Users\barkd\source\repos\LetterQuizBot\SomeProgram\obj\Debug\netcoreapp2.1\SomeProgram.AssemblyInfoInputs.cache
+C:\Users\barkd\source\repos\LetterQuizBot\SomeProgram\obj\Debug\netcoreapp2.1\SomeProgram.AssemblyInfo.cs
+C:\Users\barkd\source\repos\LetterQuizBot\SomeProgram\obj\Debug\netcoreapp2.1\SomeProgram.dll
+C:\Users\barkd\source\repos\LetterQuizBot\SomeProgram\obj\Debug\netcoreapp2.1\SomeProgram.pdb
