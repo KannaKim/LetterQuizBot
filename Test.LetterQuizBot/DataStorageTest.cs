@@ -17,13 +17,13 @@ namespace Test.LetterQuizBot
         public DataStorageTest()
         {
             Console.WriteLine("const");
-            Directory.SetCurrentDirectory(@"C:\Users\barkd\source\repos\LetterQuizBot\Test.LetterQuizBot");
+            Directory.SetCurrentDirectory(Environment.GetEnvironmentVariable("TestDirectory"));
         }
 
         [Fact]
         public static void AddUserPairShouldWork()
         {
-            Directory.SetCurrentDirectory(@"C:\Users\barkd\source\repos\LetterQuizBot\Test.LetterQuizBot");
+            Directory.SetCurrentDirectory(Environment.GetEnvironmentVariable("TestDirectory"));
 
             string adding_data = "JohnDoe#1234";
             DataStorage.AddUserPair(adding_data);
@@ -37,7 +37,7 @@ namespace Test.LetterQuizBot
         [Theory]
         public static void GetUniqueRandomArrayShouldWork(int min,int max,int size)
         {
-            Directory.SetCurrentDirectory(@"C:\Users\barkd\source\repos\LetterQuizBot\Test.LetterQuizBot");
+            Directory.SetCurrentDirectory(Environment.GetEnvironmentVariable("TestDirectory"));
             int[] a = DataStorage.GetUniqueRandomArray(min, max, size);
             Assert.True(a.Length == a.Distinct().Count());
 
@@ -48,14 +48,14 @@ namespace Test.LetterQuizBot
         [Theory]
         public static void ChceckIfSynonymShouldWork(string userAns, string actualAns,string actualTheme)
         {
-            Directory.SetCurrentDirectory(@"C:\Users\barkd\source\repos\LetterQuizBot\Test.LetterQuizBot");
+            Directory.SetCurrentDirectory(Environment.GetEnvironmentVariable("TestDirectory"));
             Assert.True(DataStorage.ChceckIfSynonym(userAns,actualAns,actualTheme));
         }
 
         [Fact]
         public static void AddEntirePairToJsonShouldWork()
         {
-            Directory.SetCurrentDirectory(@"C:\Users\barkd\source\repos\LetterQuizBot\Test.LetterQuizBot");
+            Directory.SetCurrentDirectory(Environment.GetEnvironmentVariable("TestDirectory"));
             DataStorage.AddUserPair("JohnDoe#1234");
             DataStorage.SaveEntirePairsToJson();    
         }
@@ -68,7 +68,7 @@ namespace Test.LetterQuizBot
         [Theory]
         public static void GetThemeToSlangShouldWork(string expected,string theme)
         {
-            Directory.SetCurrentDirectory(@"C:\Users\barkd\source\repos\LetterQuizBot\Test.LetterQuizBot");
+            Directory.SetCurrentDirectory(Environment.GetEnvironmentVariable("TestDirectory"));
             string actual = DataStorage.themeToSlang[theme];
             Assert.Equal(expected,actual);
         }
@@ -77,7 +77,7 @@ namespace Test.LetterQuizBot
         public static void AddEntirePairToJsonShouldNotWork()
         {
             //assuming JohnDoe#1234 is already added 
-            Directory.SetCurrentDirectory(@"C:\Users\barkd\source\repos\LetterQuizBot\Test.LetterQuizBot");
+            Directory.SetCurrentDirectory(Environment.GetEnvironmentVariable("TestDirectory"));
             Assert.Throws<System.ArgumentException>(() => DataStorage.SaveEntirePairsToJson());
         }
 
@@ -85,7 +85,7 @@ namespace Test.LetterQuizBot
         //[Theory]
         //public static void GetThemeFromSlangShouldWork(string theme, string actual)
         //{
-        //    Directory.SetCurrentDirectory(@"C:\Users\barkd\source\repos\LetterQuizBot\Test.LetterQuizBot");
+        //    Directory.SetCurrentDirectory(Environment.GetEnvironmentVariable("TestDirectory"));
         //    List<string> expected = DataStorage.GetThemeFromSlangs(new string[]{theme});
         //    Assert.Equal(expected, actual);
         //}
@@ -95,7 +95,7 @@ namespace Test.LetterQuizBot
         [Fact]
         public static void GetLangDataFromJasonShouldWork()
         {
-            Directory.SetCurrentDirectory(@"C:\Users\barkd\source\repos\LetterQuizBot\Test.LetterQuizBot");
+            Directory.SetCurrentDirectory(Environment.GetEnvironmentVariable("TestDirectory"));
             Assert.NotEmpty(DataStorage.GetLangDataFromJason());
         }
 
@@ -105,7 +105,7 @@ namespace Test.LetterQuizBot
         [Theory]
         public static void GetUserOptionValShouldWork(int op)
         {
-            Directory.SetCurrentDirectory(@"C:\Users\barkd\source\repos\LetterQuizBot\Test.LetterQuizBot");
+            Directory.SetCurrentDirectory(Environment.GetEnvironmentVariable("TestDirectory"));
             string nameTag = "JohnDoe#1234";
             Assert.NotNull(DataStorage.GetUserOptionVal(nameTag,op));
         }
@@ -113,7 +113,7 @@ namespace Test.LetterQuizBot
         public static void GetUserDataShouldWork()
         {
             //assuming JohnDoe#1234 is already added 
-            Directory.SetCurrentDirectory(@"C:\Users\barkd\source\repos\LetterQuizBot\Test.LetterQuizBot");
+            Directory.SetCurrentDirectory(Environment.GetEnvironmentVariable("TestDirectory"));
             string data = "JohnDoe#1234";
             Assert.IsType<Dictionary<string, dynamic>>(DataStorage.GetUserData(data));
         }
@@ -128,7 +128,7 @@ namespace Test.LetterQuizBot
         [Fact]
         public static void FetchColumnDataShouldWork()
         {
-            Directory.SetCurrentDirectory(@"C:\Users\barkd\source\repos\LetterQuizBot\Test.LetterQuizBot");
+            Directory.SetCurrentDirectory(Environment.GetEnvironmentVariable("TestDirectory"));
             string current_theme = DataStorage.GetUserOptionVal("TechyTechy#1747", Option.SET_THEME);
             Dictionary<string, dynamic> query_data = DataStorage.FetchWord("random");
             string correctAnswer = query_data["_id"];

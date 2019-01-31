@@ -17,8 +17,6 @@ namespace LetterQuizBot
 
         private async Task MainAsync()
         {
-            Directory.SetCurrentDirectory(Path.Join("..","..",".."));
-            Console.WriteLine("Working Directory: {0}",Directory.GetCurrentDirectory());
             using (var services = ConfigureServices())
             {
                 var client = services.GetRequiredService<DiscordSocketClient>();

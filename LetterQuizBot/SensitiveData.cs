@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.NetworkInformation;
 using System.Security.Principal;
 using System.Text;
 using Newtonsoft.Json;
@@ -14,11 +15,12 @@ namespace LetterQuizBot
         public static string Token { get; set; }
         public static string Id { get; set; }
         public static string CommandPrefix { get; set; }
-
+        public static string workingDirectory { get; set; }
         static SensitiveData()
         {
-            Directory.SetCurrentDirectory(@"C:\Users\barkd\source\repos\LetterQuizBot\LetterQuizBot\");
-            Console.WriteLine(Directory.GetCurrentDirectory());
+            workingDirectory= Environment.GetEnvironmentVariable("WorkingDirectory");
+            Directory.SetCurrentDirectory(workingDirectory);
+            Console.WriteLine("Working Directory: {0}", Directory.GetCurrentDirectory());
             Token = Environment.GetEnvironmentVariable("LetterQuizBotToken");
             Id = Environment.GetEnvironmentVariable("LetterQuizBotID");
             using (StreamReader sr =  File.OpenText("config.json"))
