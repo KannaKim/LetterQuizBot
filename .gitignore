@@ -10,12 +10,10 @@
 *.userosscache
 *.sln.docstates
 UserData
-Log
+Log/*
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 db.lock
-*.ide-wal
-*.ide-shm
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
