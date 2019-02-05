@@ -9,8 +9,10 @@
 *.user
 *.userosscache
 *.sln.docstates
+
 LetterQuizBot/UserData
 LetterQuizbot/Log/*
+*/Testt
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 db.lock
