@@ -1,16 +1,16 @@
 {
   "TechyTechy#1747": {
     "correct_streak": 0,
-    "generated": true,
-    "answer": "미나미다타이시",
-    "reward": 34,
-    "question": "ㅁ나미다ㅌㅇㅅ",
+    "generated": false,
+    "answer": "그림을그려요",
+    "reward": 32,
+    "question": "ㄱㄹㅇㄱㄹ요",
     "theme": "",
     "win": 26,
-    "lose": 145,
+    "lose": 151,
     "set_theme": "random",
-    "generated_time": 1548839590,
-    "question_theme": "하이큐!!",
+    "generated_time": 1549331449,
+    "question_theme": "만화/애니메이션",
     "set_command_prefix": "ㅎ"
   },
   "Arialily#1361": {

@@ -11,7 +11,7 @@ namespace LetterQuizBot
         //public static void SpecialMsgOccured(string userName, string specialMsg)
         //{
         //    var m = await ReplyAsync(specialMsg);
-        //    Console.WriteLine($"{specialMsg} was invoked to user name: {userName}");
+        //    Loggers.log.Info($"{specialMsg} was invoked to user name: {userName}");
         //}
     }
 }

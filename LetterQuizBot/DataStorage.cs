@@ -164,7 +164,7 @@ namespace LetterQuizBot
                     cmd.Connection = conn;
                     cmd.Prepare();
                     cmd.ExecuteNonQuery();
-                    Console.WriteLine(cmd.CommandText);
+                    Loggers.log.Info(cmd.CommandText);
 
                     using (var reader = cmd.ExecuteReader()) 
                     {
@@ -298,7 +298,7 @@ namespace LetterQuizBot
                         cmd.Connection = conn;
                         cmd.Prepare();
                         cmd.ExecuteNonQuery();
-                        Console.WriteLine(cmd.CommandText);
+                        Loggers.log.Info(cmd.CommandText);
 
                         var reader = cmd.ExecuteReader();
                         
@@ -358,7 +358,7 @@ namespace LetterQuizBot
                     cmd.Connection = conn;
                     cmd.Prepare();
                     cmd.ExecuteNonQuery();
-                    Console.WriteLine(cmd.CommandText);
+                    Loggers.log.Info(cmd.CommandText);
                     resultMsg = "```md\n";
                     using (var reader = cmd.ExecuteReader())
                     {
@@ -407,7 +407,7 @@ namespace LetterQuizBot
                     cmd.Connection = conn;
                     cmd.Prepare();
                     cmd.ExecuteNonQuery();
-                    Console.WriteLine(cmd.CommandText);
+                    Loggers.log.Info(cmd.CommandText);
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
@@ -429,7 +429,7 @@ namespace LetterQuizBot
 
 
 
-                            Console.WriteLine($"_id: {_id} type: {_type} mean: {_mean} hit: {_hit} flag: {_flag} theme: {_theme}");
+                            Loggers.log.Info($"_id: {_id} type: {_type} mean: {_mean} hit: {_hit} flag: {_flag} theme: {_theme}");
                         }
                     }
                 }

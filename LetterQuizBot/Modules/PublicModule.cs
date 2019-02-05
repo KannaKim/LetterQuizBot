@@ -463,7 +463,7 @@ namespace LetterQuizBot.Modules
         public async Task SpecialMsgEventWasInvokedTask(string specialMsg,int delteAfterMillisec)
         { 
             var m = await ReplyAsync(specialMsg);
-            Console.WriteLine($"{specialMsg} was invoked to user name: {Context.User.ToString()}");
+            Loggers.log.Info($"{specialMsg} was invoked to user name: {Context.User.ToString()}");
             await Task.Delay(delteAfterMillisec);
             await Context.Channel.DeleteMessageAsync(m.Id);
         }

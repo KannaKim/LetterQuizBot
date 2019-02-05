@@ -13,7 +13,7 @@ namespace LetterQuizBot
     class Program : ModuleBase<SocketCommandContext>
     {
         public static void Main(string[] args) => new Program().MainAsync().GetAwaiter().GetResult();
-
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private async Task MainAsync()
         {
@@ -46,7 +46,8 @@ namespace LetterQuizBot
 
         private Task LogAsync(LogMessage log)
         {
-            Console.WriteLine(log.ToString());
+
+            Loggers.log.Info(log.ToString());
             return Task.CompletedTask;
         }
 

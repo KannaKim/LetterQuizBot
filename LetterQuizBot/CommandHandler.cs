@@ -33,6 +33,7 @@ namespace LetterQuizBot
 
         public async Task MessageReceivedAsync(SocketMessage msg)
         {
+
             if (!(msg is SocketUserMessage messege)) return;
             if (messege.Source != MessageSource.User) return;
 
@@ -41,20 +42,24 @@ namespace LetterQuizBot
             var context = new SocketCommandContext(_client, messege);
             if (! (messege.HasMentionPrefix(_client.CurrentUser, ref argPos)|| 
                    messege.HasStringPrefix((string)DataStorage.GetUserOptionVal(context.User.ToString(), Option.SET_COMMAND_PREFIX), ref argPos)  || messege.HasStringPrefix(SensitiveData.CommandPrefix,ref argPos ))) return;
-
+            Loggers.log.Info($"username: {context.User.ToString()}  command: {context.Message.ToString()}");
             await _commands.ExecuteAsync(context, argPos, _services); // we will handle the result in CommandExecutedAsync
         }
 
         public async Task CommandExecutedAsync(Optional<CommandInfo> cmdInfo, ICommandContext context, IResult result)
-        { 
+        {
             if (cmdInfo.IsSpecified == false)
+            {
+                Loggers.log.Info($"username: {context.User.ToString()}  attempted: {context.Message.ToString()}");
                 return;
-            
+            }
 
             if (result.IsSuccess)
+            {
                 return;
+            }
 
-            await context.Channel.SendMessageAsync($"error: {result.ToString()}");
+            Loggers.log.Error($"error: {result.ToString()}");
         }
     }
 }

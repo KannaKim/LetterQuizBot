@@ -7,7 +7,7 @@ using System.Security.Principal;
 using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-
+using NLog;
 namespace LetterQuizBot
 {
     class SensitiveData
@@ -20,7 +20,7 @@ namespace LetterQuizBot
         {
             workingDirectory= Environment.GetEnvironmentVariable("WorkingDirectory");
             Directory.SetCurrentDirectory(workingDirectory);
-            Console.WriteLine("Working Directory: {0}", Directory.GetCurrentDirectory());
+            Loggers.log.Info($"Working Directory: {Directory.GetCurrentDirectory()}");
             Token = Environment.GetEnvironmentVariable("LetterQuizBotToken");
             Id = Environment.GetEnvironmentVariable("LetterQuizBotID");
             using (StreamReader sr =  File.OpenText("config.json"))

@@ -9,3 +9,4 @@ C:\Users\barkd\source\repos\LetterQuizBot\LetterQuizBot\obj\Debug\netcoreapp2.1\
 C:\Users\barkd\source\repos\LetterQuizBot\LetterQuizBot\bin\Debug\netcoreapp2.1\LetterQuizBot.pdb
 C:\Users\barkd\source\repos\LetterQuizBot\LetterQuizBot\obj\Debug\netcoreapp2.1\LetterQuizBot.dll
 C:\Users\barkd\source\repos\LetterQuizBot\LetterQuizBot\obj\Debug\netcoreapp2.1\LetterQuizBot.pdb
+C:\Users\barkd\source\repos\LetterQuizBot\LetterQuizBot\bin\Debug\netcoreapp2.1\log4net.config

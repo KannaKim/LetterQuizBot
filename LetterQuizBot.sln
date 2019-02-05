@@ -19,6 +19,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FunWCommandLine", "FunWComm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunWProject", "FunWProject\FunWProject.csproj", "{CFB1FD18-7FF1-4F73-9837-F646610FA1F6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FunWLogger", "FunWLogger", "{1F50EBE4-19CE-4AAD-A511-B693792E6042}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoggingDemo", "LoggingDemo\LoggingDemo.csproj", "{5533184C-1708-4E16-8B71-1666B2126ABD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,10 @@ Global
 		{CFB1FD18-7FF1-4F73-9837-F646610FA1F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CFB1FD18-7FF1-4F73-9837-F646610FA1F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CFB1FD18-7FF1-4F73-9837-F646610FA1F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5533184C-1708-4E16-8B71-1666B2126ABD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5533184C-1708-4E16-8B71-1666B2126ABD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5533184C-1708-4E16-8B71-1666B2126ABD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5533184C-1708-4E16-8B71-1666B2126ABD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +61,7 @@ Global
 		{DE17153B-ACB7-4EEF-A905-817097108B56} = {13457903-5CB4-4E74-A9B0-21F97A127D68}
 		{98EBCDDD-38C5-4434-B0F4-647AD49822FA} = {61FBBA4B-DA54-4DC8-8327-B28822778C69}
 		{CFB1FD18-7FF1-4F73-9837-F646610FA1F6} = {E008A87E-E1F4-4F89-B08E-98426CB5C8B9}
+		{5533184C-1708-4E16-8B71-1666B2126ABD} = {1F50EBE4-19CE-4AAD-A511-B693792E6042}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8A6A8595-9EC6-44B1-A9DE-65949DC41CC4}
