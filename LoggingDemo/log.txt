@@ -1,4 +1,0 @@
-19:01:46,386 [1] ERROR LoggingDemo.Program - Hello logging world!
-19:01:46,399 [1] DEBUG LoggingDemo.Program - Hell logging world!
-19:10:29,257 [1] ERROR LoggingDemo.Program - Hello logging world!
-19:10:29,269 [1] DEBUG LoggingDemo.Program - Hell logging world!
