@@ -196,8 +196,6 @@ namespace LetterQuizBot
             {
                 return false;
             }
-                
-
         }
         public static Dictionary<string, dynamic> GetUserData(string userNameTag)
         {
@@ -251,13 +249,30 @@ namespace LetterQuizBot
             File.WriteAllText(userDataPath,output);
         }
 
-        public static void RegisterDataInSQL(string userName)
+        private static void RegisterDataInSQL(string userName,ulong serverID)
         {
             using (var conn = new NpgsqlConnection(connString))
             {
                 conn.Open();
                 // Insert some data
-                string sql_statement= $"insert into public.leaderboard values ('{userName}')";
+                string sql_statement= $"insert into public.leaderboard(username, serverid) values ('{userName}','{{{serverID}}}')";
+                using (var cmd = new NpgsqlCommand(sql_statement))
+                {
+                    cmd.Connection = conn;
+                    cmd.Prepare();
+                    cmd.ExecuteNonQuery();
+                    Loggers.log.Info(sql_statement);
+                }
+            }
+        }
+
+        public static void UpdateServerID(string userName,ulong serverID)  
+        {
+            using (var conn = new NpgsqlConnection(connString))
+            {
+                conn.Open();
+                // Insert some data
+                string sql_statement = $"update public.leaderboard set serverID = array_append(serverID, {serverID}) where username = '{userName}'";
                 using (var cmd = new NpgsqlCommand(sql_statement))
                 {
                     cmd.Connection = conn;
@@ -266,25 +281,63 @@ namespace LetterQuizBot
                 }
             }
         }
-        public static void UpdateDataInSQL(string userName,long currentScore)        // theme to slang and put it in command
+
+
+        public static void UpdateScoreInSQL(string userName,long currentScore,ulong serverID, bool isPravate)        // theme to slang and put it in command
         {
             using (var conn = new NpgsqlConnection(connString))
             {
                 conn.Open();
                 // Insert some data
-                string sql_statement = $"update public.leaderboard set score = {currentScore} where username='{userName}'";
+                string check_statement= $"select serverid from public.leaderboard where username='{userName}' and {serverID} = any(serverid)";
+                bool serverIDExist;
+                using (var cmd = new NpgsqlCommand(check_statement))
+                {
+                    cmd.Connection = conn;
+                    cmd.Prepare();
+                    cmd.ExecuteNonQuery();
+                
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        serverIDExist = reader.HasRows;
+                    }
+                    Loggers.log.Info($"serverIDExist: {serverIDExist}");
+                }
+
+                string sql_statement;
+                if (isPravate) //if DM 
+                {
+                    sql_statement = $"update public.leaderboard set score = {currentScore} where username='{userName}'";
+                }
+                else 
+                {
+
+                    if (serverIDExist) // that server already exist
+                    {
+                        sql_statement =
+                            $"update public.leaderboard set score = {currentScore} where username='{userName}'";
+
+                    }
+
+                    else // if server ID not exist in array
+                    {
+                        sql_statement =
+                            $"update public.leaderboard set score = {currentScore},serverID = array_append(serverID, {serverID}::bigint) where username='{userName}'";
+                    }
+                }
 
                 using (var cmd = new NpgsqlCommand(sql_statement))
                 {
                     cmd.Connection = conn;
                     cmd.Prepare();
                     cmd.ExecuteNonQuery();
+                    Loggers.log.Info(sql_statement);
                 }
 
             }
         }
 
-        public static long GetUserScore(string userName)
+        public static long GetUserScore(string userName, ulong channelID)   // assuming msg is from channel 
         {
             long currentScore= 0;
             using (var conn = new NpgsqlConnection(connString))
@@ -305,7 +358,7 @@ namespace LetterQuizBot
                         if (reader.HasRows ==false)
                         {
                             reader.Close();
-                            RegisterDataInSQL(userName);
+                            RegisterDataInSQL(userName, channelID);
                           
                             cmd.Connection = conn;
                             cmd.ExecuteNonQuery();
@@ -344,7 +397,40 @@ namespace LetterQuizBot
 
             return ret;
         }
+        public static string GetTopnScoreInGuild(int n, ulong channelID, string serverName) //서버통함랭 working on
+        {
+            string resultMsg = null;
+            using (var conn = new NpgsqlConnection(connString))
+            {
+                conn.Open();
+                // Insert some data
+                string sql_statement = $"select * from public.leaderboard where {channelID} = any(serverid) order by score desc limit {n}";
+                using (var cmd = new NpgsqlCommand(sql_statement))
+                {
+                    cmd.Connection = conn;
+                    cmd.Prepare();
+                    cmd.ExecuteNonQuery();
+                    Loggers.log.Info(cmd.CommandText);
+                    resultMsg = $"```md\n#{serverName}서버 내 랭킹\n";
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        int i = 1;
+                        while (reader.Read())
+                        {
+                            // reader.GetString(1) = score
+                            int win = (int)DataStorage.GetUserOptionVal(reader.GetString(0), Option.WIN);
+                            int lose = (int)DataStorage.GetUserOptionVal(reader.GetString(0), Option.LOSE);
+                            double winrate = Math.Round(win == 0 && lose == 0 ? 0 : (double)win / (win + lose) * 100, 2);
+                            resultMsg += $"{i}. {reader.GetString(0)} {reader.GetInt64(1)}점 ({win}승 {lose}패 승률:{winrate}%)\n";
+                            i += 1;
+                        }
+                    }
 
+                    resultMsg += "```";
+                }
+            }
+            return resultMsg;
+        }
         public static string GetTopnScore(int n)
         {
             string resultMsg = null;

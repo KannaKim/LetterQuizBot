@@ -29,6 +29,8 @@ namespace LetterQuizBot
         public async Task InitializeAsnyc()
         {
             await _commands.AddModuleAsync<PublicModule>(_services);
+            await _commands.AddModuleAsync<ChannelSpecificModule>(_services);
+            await _commands.AddModuleAsync<DMSpecificModule>(_services);
         }
 
         public async Task MessageReceivedAsync(SocketMessage msg)
@@ -42,7 +44,7 @@ namespace LetterQuizBot
             var context = new SocketCommandContext(_client, messege);
             if (! (messege.HasMentionPrefix(_client.CurrentUser, ref argPos)|| 
                    messege.HasStringPrefix((string)DataStorage.GetUserOptionVal(context.User.ToString(), Option.SET_COMMAND_PREFIX), ref argPos)  || messege.HasStringPrefix(SensitiveData.CommandPrefix,ref argPos ))) return;
-            Loggers.log.Info($"username: {context.User.ToString()}  command: {context.Message.ToString()}");
+            Loggers.log.Info($"username: {context.User.ToString()}  attempted: {context.Message.ToString()}");
             await _commands.ExecuteAsync(context, argPos, _services); // we will handle the result in CommandExecutedAsync
         }
 
@@ -50,7 +52,6 @@ namespace LetterQuizBot
         {
             if (cmdInfo.IsSpecified == false)
             {
-                Loggers.log.Info($"username: {context.User.ToString()}  attempted: {context.Message.ToString()}");
                 return;
             }
 

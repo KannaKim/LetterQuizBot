@@ -36,7 +36,7 @@ namespace LetterQuizBot.Modules
                 await _chnl.SendMessageAsync(result_msg);
             }
         }
-
+        
         [Command("사랑해")]
         public async Task helloAsync()
         {
@@ -145,7 +145,7 @@ namespace LetterQuizBot.Modules
         public async Task ScoreAsync()
         {
             int streak = (int)DataStorage.GetUserOptionVal(Context.User.ToString(), Option.CORRECT_STREAK);
-            long currentScore = DataStorage.GetUserScore(Context.User.ToString());
+            long currentScore = DataStorage.GetUserScore(Context.User.ToString(),Context.User.Id);
             int win = (int)DataStorage.GetUserOptionVal(Context.User.ToString(), Option.WIN);
             int lose = (int)DataStorage.GetUserOptionVal(Context.User.ToString(), Option.LOSE);
             double winRate = Math.Round(win == 0 && lose == 0 ? 0 : (double)win / (win + lose) * 100,2);
@@ -244,8 +244,6 @@ namespace LetterQuizBot.Modules
         [Alias("g", "ㅎ")]
         public async Task GenerateAsync([Remainder] string user_ans = "")
         {
-            //todo: don't let english and ㅇㅅㄴㄴㅁㅇㅅㅇㄴ comes in or disaster happen
-
             long time_limit = 60; //time limit before you can enter your answer
 
             if (DataStorage.userData.ContainsKey(Context.User.ToString()) == false)
@@ -261,7 +259,7 @@ namespace LetterQuizBot.Modules
 
             int reward = (int) DataStorage.GetUserOptionVal(Context.User.ToString(), Option.REWARD);
             int streak = (int) DataStorage.GetUserOptionVal(Context.User.ToString(), Option.CORRECT_STREAK);
-            long currentScore = DataStorage.GetUserScore(Context.User.ToString());
+            long currentScore = DataStorage.GetUserScore(Context.User.ToString(),Context.Guild.Id);
             double magicNumber = 5000; //after this point they get no handicap
 
             bool generated = DataStorage.GetUserOptionVal(Context.User.ToString(), Option.GENERATED);
@@ -344,7 +342,6 @@ namespace LetterQuizBot.Modules
                         streak += 1;
                         win += 1;
                         currentScore += reward < magicNumber ? (int)((magicNumber-currentScore)/magicNumber*reward): (int)(magicNumber-1);
-                        DataStorage.UpdateDataInSQL(Context.User.ToString(), reward);
                         if (streak > 1)
                         {
                             resultMsg += ($"정답입니다!!! +{reward}\n현재까지 {streak} 연승중!!! 연전연승!!\n");
@@ -389,7 +386,6 @@ namespace LetterQuizBot.Modules
                             streak += 1;
                             win += 1;
                             currentScore += reward;
-                            DataStorage.UpdateDataInSQL(Context.User.ToString(), reward);
                             if (streak > 1)
                             {
                                 resultMsg += ($"정답입니다!!! +{reward}\n현재까지 {streak} 연승중!!! 연전연승!!\n");
@@ -429,7 +425,7 @@ namespace LetterQuizBot.Modules
                         }
                         else
                         {
-                            resultMsg += ($"오답입니다! 정답은 {correctAnswer}, 점수 -{decrement}\n");
+                            resultMsg += ($"오답입니다! 정답은 {correctAnswer}\n");
                         }
                  
                     }
@@ -444,8 +440,8 @@ namespace LetterQuizBot.Modules
 
                     await ReplyAsync(Context.User.Mention + "\n" + resultMsg);
 
-                    //DataStorage.SetUserOptionVal(Context.User.ToString(), Option.SCORE, currentScore);
-                    DataStorage.UpdateDataInSQL(Context.User.ToString(), currentScore);
+     
+                    DataStorage.UpdateScoreInSQL(Context.User.ToString(), currentScore,Context.Guild.Id,Context.IsPrivate);
                     DataStorage.SetUserOptionVal(Context.User.ToString(), Option.QUESTION, question);
                     DataStorage.SetUserOptionVal(Context.User.ToString(), Option.GENERATED, generated);
                     DataStorage.SetUserOptionVal(Context.User.ToString(), Option.ANSWER, correctAnswer);
