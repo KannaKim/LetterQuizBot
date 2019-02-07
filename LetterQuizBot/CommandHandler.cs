@@ -23,7 +23,13 @@ namespace LetterQuizBot
             _services = services;
 
             _client.MessageReceived += MessageReceivedAsync;
+            //_client.GuildAvailable += GuildAvailableAsync; 
             _commands.CommandExecuted += CommandExecutedAsync;
+
+        }
+
+        public async Task GuildAvailableAsync(SocketGuild sg)
+        {
 
         }
         public async Task InitializeAsnyc()
@@ -35,13 +41,20 @@ namespace LetterQuizBot
 
         public async Task MessageReceivedAsync(SocketMessage msg)
         {
-
             if (!(msg is SocketUserMessage messege)) return;
             if (messege.Source != MessageSource.User) return;
 
             var argPos = 0;
 
             var context = new SocketCommandContext(_client, messege);
+
+
+            if (DataStorage.userData.ContainsKey(context.User.ToString()) == false) // add user dictionary if user not exist
+            {
+                DataStorage.RegisterUserData(context);
+            }
+
+
             if (! (messege.HasMentionPrefix(_client.CurrentUser, ref argPos)|| 
                    messege.HasStringPrefix((string)DataStorage.GetUserOptionVal(context.User.ToString(), Option.SET_COMMAND_PREFIX), ref argPos)  || messege.HasStringPrefix(SensitiveData.CommandPrefix,ref argPos ))) return;
             Loggers.log.Info($"username: {context.User.ToString()}  attempted: {context.Message.ToString()}");

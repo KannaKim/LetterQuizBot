@@ -145,12 +145,12 @@ namespace LetterQuizBot.Modules
         public async Task ScoreAsync()
         {
             int streak = (int)DataStorage.GetUserOptionVal(Context.User.ToString(), Option.CORRECT_STREAK);
-            long currentScore = DataStorage.GetUserScore(Context.User.ToString(),Context.User.Id);
+            long currentScore = DataStorage.GetUserScore(Context);
             int win = (int)DataStorage.GetUserOptionVal(Context.User.ToString(), Option.WIN);
             int lose = (int)DataStorage.GetUserOptionVal(Context.User.ToString(), Option.LOSE);
             double winRate = Math.Round(win == 0 && lose == 0 ? 0 : (double)win / (win + lose) * 100,2);
             
-            string resultMsg = ($"현재 점수 : {currentScore} \n" +
+            string resultMsg = ($"{Context.User.Mention}\n현재 점수 : {currentScore} \n" +
                           $"승: {win} 패: {lose} 승률:{ winRate }%\n");
             if (streak > 1)
                 resultMsg += $"**현재 {streak}연승중!!**";
@@ -245,10 +245,10 @@ namespace LetterQuizBot.Modules
         public async Task GenerateAsync([Remainder] string user_ans = "")
         {
             long time_limit = 60; //time limit before you can enter your answer
-
             if (DataStorage.userData.ContainsKey(Context.User.ToString()) == false)
             {
                 DataStorage.AddUserPair(Context.User.ToString());
+                DataStorage.RegisterUserInSQL(Context);
             }
 
             string correctAnswer = DataStorage.GetUserOptionVal(Context.User.ToString(), Option.ANSWER);
@@ -259,7 +259,7 @@ namespace LetterQuizBot.Modules
 
             int reward = (int) DataStorage.GetUserOptionVal(Context.User.ToString(), Option.REWARD);
             int streak = (int) DataStorage.GetUserOptionVal(Context.User.ToString(), Option.CORRECT_STREAK);
-            long currentScore = DataStorage.GetUserScore(Context.User.ToString(),Context.Guild.Id);
+            long currentScore = DataStorage.GetUserScore(Context);
             double magicNumber = 5000; //after this point they get no handicap
 
             bool generated = DataStorage.GetUserOptionVal(Context.User.ToString(), Option.GENERATED);
@@ -441,7 +441,7 @@ namespace LetterQuizBot.Modules
                     await ReplyAsync(Context.User.Mention + "\n" + resultMsg);
 
      
-                    DataStorage.UpdateScoreInSQL(Context.User.ToString(), currentScore,Context.Guild.Id,Context.IsPrivate);
+                    DataStorage.UpdateScoreInSQL(Context,currentScore);
                     DataStorage.SetUserOptionVal(Context.User.ToString(), Option.QUESTION, question);
                     DataStorage.SetUserOptionVal(Context.User.ToString(), Option.GENERATED, generated);
                     DataStorage.SetUserOptionVal(Context.User.ToString(), Option.ANSWER, correctAnswer);

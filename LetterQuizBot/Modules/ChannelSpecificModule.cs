@@ -10,16 +10,16 @@ namespace LetterQuizBot.Modules
     {
 
         [Command("서버내순위")] // 순위 로 바뀔예정
-        public async Task ServerRankIndividual()
+        public async Task GuildRankIndividual()
         {
             if(Context.IsPrivate==false)
                 await ReplyAsync(DataStorage.GetTopnScoreInGuild(10, Context.Guild.Id,Context.Guild.Name));
         }
         [Command("서버랭킹")]
-        public async Task ServerRanking()
+        public async Task GuildRanking()
         {
             if (Context.IsPrivate == false)
-                await ReplyAsync(DataStorage.GetTopnScoreInGuild(10, Context.Guild.Id, Context.Guild.Name));
+                await ReplyAsync("미구현");
         }
     }
 }

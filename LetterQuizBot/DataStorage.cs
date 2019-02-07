@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using CommandLine.Text;
+using Discord.Commands;
 using Newtonsoft.Json;
 using Npgsql;
 
@@ -43,7 +44,6 @@ namespace LetterQuizBot
             helpText = GetHelpText();
 
         }
-
         private static string GetHelpText()
         {
             string helpText = "";
@@ -239,6 +239,7 @@ namespace LetterQuizBot
         public static void AddUserPair(string userNameTag)
         {
             userData.Add(userNameTag,Option.defaultOptionValue);
+            Loggers.log.Info("Adding User Pair");
         }
 
 
@@ -247,82 +248,143 @@ namespace LetterQuizBot
             string output = JsonConvert.SerializeObject(userData,Formatting.Indented);
 
             File.WriteAllText(userDataPath,output);
+            Loggers.log.Info("Saving Entire Pair");
         }
 
-        private static void RegisterDataInSQL(string userName,ulong serverID)
+        public static void RegisterUserInSQL(SocketCommandContext context)
         {
-            using (var conn = new NpgsqlConnection(connString))
+            string userName = context.User.ToString();
+            if (context.IsPrivate)
             {
-                conn.Open();
-                // Insert some data
-                string sql_statement= $"insert into public.leaderboard(username, serverid) values ('{userName}','{{{serverID}}}')";
-                using (var cmd = new NpgsqlCommand(sql_statement))
+                using (var conn = new NpgsqlConnection(connString))
                 {
-                    cmd.Connection = conn;
-                    cmd.Prepare();
-                    cmd.ExecuteNonQuery();
-                    Loggers.log.Info(sql_statement);
+                    conn.Open();
+                    // Insert some data
+                    string sql_statement =
+                        $"insert into public.leaderboard(username) values ('{userName}')";
+                    using (var cmd = new NpgsqlCommand(sql_statement))
+                    {
+                        cmd.Connection = conn;
+                        cmd.Prepare();
+                        cmd.ExecuteNonQuery();
+                        Loggers.log.Info(sql_statement);
+                    }
+                }
+            }
+            else
+            {
+                ulong GuildID = context.Guild.Id;
+                using (var conn = new NpgsqlConnection(connString))
+                {
+                    conn.Open();
+                    // Insert some data
+                    string sql_statement =
+                        $"insert into public.leaderboard(username, Guildid) values ('{userName}','{{{GuildID}}}')";
+                    using (var cmd = new NpgsqlCommand(sql_statement))
+                    {
+                        cmd.Connection = conn;
+                        cmd.Prepare();
+                        cmd.ExecuteNonQuery();
+                        Loggers.log.Info(sql_statement);
+                    }
                 }
             }
         }
 
-        public static void UpdateServerID(string userName,ulong serverID)  
+        public static void UpdateGuildID(string userName,ulong GuildID)  
         {
+
             using (var conn = new NpgsqlConnection(connString))
             {
                 conn.Open();
-                // Insert some data
-                string sql_statement = $"update public.leaderboard set serverID = array_append(serverID, {serverID}) where username = '{userName}'";
-                using (var cmd = new NpgsqlCommand(sql_statement))
-                {
-                    cmd.Connection = conn;
-                    cmd.Prepare();
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
-
-
-        public static void UpdateScoreInSQL(string userName,long currentScore,ulong serverID, bool isPravate)        // theme to slang and put it in command
-        {
-            using (var conn = new NpgsqlConnection(connString))
-            {
-                conn.Open();
-                // Insert some data
-                string check_statement= $"select serverid from public.leaderboard where username='{userName}' and {serverID} = any(serverid)";
-                bool serverIDExist;
+                string check_statement = $"select Guildid from public.leaderboard where username='{userName}' and {GuildID} = any(Guildid)";
+                bool GuildIDExist;
                 using (var cmd = new NpgsqlCommand(check_statement))
                 {
                     cmd.Connection = conn;
                     cmd.Prepare();
                     cmd.ExecuteNonQuery();
-                
+
                     using (var reader = cmd.ExecuteReader())
                     {
-                        serverIDExist = reader.HasRows;
+                        GuildIDExist = reader.HasRows;
                     }
-                    Loggers.log.Info($"serverIDExist: {serverIDExist}");
+                    Loggers.log.Info($"GuildIDExist: {GuildIDExist}");
                 }
 
+                if (GuildIDExist==false)
+                {
+                    // Insert some data
+                    string sql_statement =
+                        $"update public.leaderboard set GuildID = array_append(GuildID, {GuildID}) where username = '{userName}'";
+                    using (var cmd = new NpgsqlCommand(sql_statement))
+                    {
+                        cmd.Connection = conn;
+                        cmd.Prepare();
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+        }
+
+        public static void RegisterUserData(SocketCommandContext context)
+        {
+            AddUserPair(context.User.ToString());
+            SaveEntirePairsToJson();
+            RegisterUserInSQL(context);
+        }
+
+        public static bool CheckIfGuildIDExist(SocketCommandContext context)
+        {
+            using (var conn = new NpgsqlConnection(connString))
+            {
+                conn.Open();
+                // Insert some data
+                string check_statement =
+                    $"select guildID from public.leaderboard where username='{context.User.ToString()}' and {context.Guild.Id} = any(guildID)";
+                bool guildIDExist;
+                using (var cmd = new NpgsqlCommand(check_statement))
+                {
+                    cmd.Connection = conn;
+                    cmd.Prepare();
+                    cmd.ExecuteNonQuery();
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        guildIDExist = reader.HasRows;
+                    }
+
+                    Loggers.log.Info($"guildIDExist: {guildIDExist}");
+                }
+
+                return guildIDExist;
+            }
+        }
+        public static void UpdateScoreInSQL(SocketCommandContext context,long currentScore)        // theme to slang and put it in command
+        {
+            string userName = context.User.ToString();
+            using (var conn = new NpgsqlConnection(connString))
+            {
+                conn.Open();
                 string sql_statement;
-                if (isPravate) //if DM 
+                if (context.IsPrivate) //if DM 
                 {
                     sql_statement = $"update public.leaderboard set score = {currentScore} where username='{userName}'";
                 }
-                else 
+                else
                 {
-
-                    if (serverIDExist) // that server already exist
+                    bool guildIDExist = CheckIfGuildIDExist(context);
+                    if(guildIDExist) // that Guild already exist
                     {
                         sql_statement =
                             $"update public.leaderboard set score = {currentScore} where username='{userName}'";
 
                     }
 
-                    else // if server ID not exist in array
+                    else // if Guild ID not exist in array
                     {
                         sql_statement =
-                            $"update public.leaderboard set score = {currentScore},serverID = array_append(serverID, {serverID}::bigint) where username='{userName}'";
+                            $"update public.leaderboard set score = {currentScore},guildID = array_append(guildID, {context.Guild.Id}::bigint) where username='{userName}'";
                     }
                 }
 
@@ -337,14 +399,15 @@ namespace LetterQuizBot
             }
         }
 
-        public static long GetUserScore(string userName, ulong channelID)   // assuming msg is from channel 
+
+        public static long GetUserScore(SocketCommandContext context)   // assuming msg is from channel 
         {
             long currentScore= 0;
             using (var conn = new NpgsqlConnection(connString))
             {
                 conn.Open();
                 // Insert some data
-                string sql_statement = $"select * from public.leaderboard where username='{userName}'";
+                string sql_statement = $"select * from public.leaderboard where username='{context.User.ToString()}'";
 
                     using (var cmd = new NpgsqlCommand(sql_statement))
                     {
@@ -358,7 +421,7 @@ namespace LetterQuizBot
                         if (reader.HasRows ==false)
                         {
                             reader.Close();
-                            RegisterDataInSQL(userName, channelID);
+                            RegisterUserInSQL(context);
                           
                             cmd.Connection = conn;
                             cmd.ExecuteNonQuery();
@@ -397,21 +460,21 @@ namespace LetterQuizBot
 
             return ret;
         }
-        public static string GetTopnScoreInGuild(int n, ulong channelID, string serverName) //서버통함랭 working on
+        public static string GetTopnScoreInGuild(int n, ulong channelID, string GuildName) //서버통함랭 working on
         {
             string resultMsg = null;
             using (var conn = new NpgsqlConnection(connString))
             {
                 conn.Open();
                 // Insert some data
-                string sql_statement = $"select * from public.leaderboard where {channelID} = any(serverid) order by score desc limit {n}";
+                string sql_statement = $"select * from public.leaderboard where {channelID} = any(Guildid) order by score desc limit {n}";
                 using (var cmd = new NpgsqlCommand(sql_statement))
                 {
                     cmd.Connection = conn;
                     cmd.Prepare();
                     cmd.ExecuteNonQuery();
                     Loggers.log.Info(cmd.CommandText);
-                    resultMsg = $"```md\n#{serverName}서버 내 랭킹\n";
+                    resultMsg = $"```md\n#{GuildName}서버 내 랭킹\n";
                     using (var reader = cmd.ExecuteReader())
                     {
                         int i = 1;
