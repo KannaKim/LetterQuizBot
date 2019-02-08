@@ -8,20 +8,18 @@ namespace LetterQuizBot
 {
     public class DataManipulation
     {
-        public static void UpdateCurrentGuild(DiscordSocketClient ds)
+        public static void UpdateCurrentGuild(SocketGuild sg)
         {
-            foreach (var guild in ds.Guilds)
-            {
 
-                foreach (var user in guild.Users)
+            foreach (var user in sg.Users)
+            {
+                string username = user.Username + "#" + user.Discriminator;
+                if (DataStorage.userData.ContainsKey(username))
                 {
-                    string username = user.Username + "#" + user.Discriminator;
-                    if (DataStorage.userData.ContainsKey(username))
-                    {
-                        DataStorage.UpdateGuildID(username, guild.Id);
-                    }
+                    DataStorage.UpdateGuildID(username, sg.Id);
                 }
             }
+            
         }
     }
 }

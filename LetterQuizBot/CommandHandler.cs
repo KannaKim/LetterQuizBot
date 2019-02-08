@@ -23,14 +23,14 @@ namespace LetterQuizBot
             _services = services;
 
             _client.MessageReceived += MessageReceivedAsync;
-            //_client.GuildAvailable += GuildAvailableAsync; 
+            _client.GuildAvailable += GuildAvailableAsync;
             _commands.CommandExecuted += CommandExecutedAsync;
 
         }
 
         public async Task GuildAvailableAsync(SocketGuild sg)
         {
-
+            DataManipulation.UpdateCurrentGuild(sg);
         }
         public async Task InitializeAsnyc()
         {
