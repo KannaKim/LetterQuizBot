@@ -484,11 +484,22 @@ namespace LetterQuizBot
                     {
                         while (reader.Read())
                         {
-                            // reader.GetString(1) = score
-                            int win = (int)DataStorage.GetUserOptionVal(reader.GetString(0), Option.WIN);
-                            int lose = (int)DataStorage.GetUserOptionVal(reader.GetString(0), Option.LOSE);
+                            
+                            long score = reader.GetInt64(1);
+                            long rank = reader.GetInt64(3);
+                            string queryUserName = reader.GetString(0);
+                            int win = (int)DataStorage.GetUserOptionVal(queryUserName, Option.WIN);
+                            int lose = (int)DataStorage.GetUserOptionVal(queryUserName, Option.LOSE);
                             double winrate = Math.Round(win == 0 && lose == 0 ? 0 : (double)win / (win + lose) * 100, 2);
-                            resultMsg += $"{reader.GetInt64(3)}. {reader.GetString(0)} {reader.GetInt64(1)}점 ({win}승 {lose}패 승률:{winrate}%)\n";
+
+                            if (userName == queryUserName)
+                            {
+                                resultMsg += $"{rank}. * {queryUserName} {score}점 ({win}승 {lose}패 승률:{winrate}%) *\n";
+                            }
+                            else
+                            {
+                                resultMsg += $"{rank}. {queryUserName} {score}점 ({win}승 {lose}패 승률:{winrate}%)\n";
+                            }
                         }
                     }
 
