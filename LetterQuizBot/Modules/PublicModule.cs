@@ -132,8 +132,6 @@ namespace LetterQuizBot.Modules
             }
         }
 
-        [Command("leaderboard")]
-        [Alias("순위")]
         public async Task LeaderBoardAsync()
         {
             string resultMsg = DataStorage.GetTopnScore(10);// get top 10
