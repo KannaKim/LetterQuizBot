@@ -23,9 +23,9 @@ namespace LetterQuizBot.Modules
         {
             if (Context.User.ToString() == DataStorage.author)
             {
-                ulong channelID = ulong.Parse(args[0]);
+                ulong guildID = ulong.Parse(args[0]);
                 DiscordSocketClient _client = new DiscordSocketClient();
-                var _chnl = Context.Client.GetChannel(channelID) as IMessageChannel;
+                var _chnl = Context.Client.GetChannel(guildID) as IMessageChannel;
                 int argLen = args.Length;
                 string result_msg = "";
                 foreach (var m in args.Skip(1).Take(argLen))

@@ -460,21 +460,58 @@ namespace LetterQuizBot
 
             return ret;
         }
-        public static string GetTopnScoreInGuild(int n, ulong channelID, string GuildName) //서버통함랭 working on
-        {
+
+        public static string GetMyScoreInGuild(int n, ulong guildID, string userName,string guildName) // 내 랭킹을 중심으로 사람들을 보여줌 
+        { 
             string resultMsg = null;
             using (var conn = new NpgsqlConnection(connString))
             {
                 conn.Open();
                 // Insert some data
-                string sql_statement = $"select * from public.leaderboard where {channelID} = any(Guildid) order by score desc limit {n}";
+                string sql_statement = $"with user_rank"+
+                $" as (select username, score, guildid, row_number() over(order by score desc) from public.leaderboard where {guildID}=any(guildid)),"+
+                $" user_rank_var(a)"+
+                $" as(select row_number from user_rank where username='{userName}')"+
+                $" select* from user_rank where user_rank.row_number between(select a-{n} from user_rank_var) and(select a+{n} from user_rank_var)";
                 using (var cmd = new NpgsqlCommand(sql_statement))
                 {
                     cmd.Connection = conn;
                     cmd.Prepare();
                     cmd.ExecuteNonQuery();
                     Loggers.log.Info(cmd.CommandText);
-                    resultMsg = $"```md\n#{GuildName}서버 내 랭킹\n";
+                    resultMsg = $"```md\n#{guildName} 서버 내 랭킹\n";
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            // reader.GetString(1) = score
+                            int win = (int)DataStorage.GetUserOptionVal(reader.GetString(0), Option.WIN);
+                            int lose = (int)DataStorage.GetUserOptionVal(reader.GetString(0), Option.LOSE);
+                            double winrate = Math.Round(win == 0 && lose == 0 ? 0 : (double)win / (win + lose) * 100, 2);
+                            resultMsg += $"{reader.GetInt64(3)}. {reader.GetString(0)} {reader.GetInt64(1)}점 ({win}승 {lose}패 승률:{winrate}%)\n";
+                        }
+                    }
+
+                    resultMsg += "```";
+                }
+            }
+            return resultMsg;
+        }
+        public static string GetTopnScoreInGuild(int n, ulong guildID, string GuildName) 
+        {
+            string resultMsg = null;
+            using (var conn = new NpgsqlConnection(connString))
+            {
+                conn.Open();
+                // Insert some data
+                string sql_statement = $"select * from public.leaderboard where {guildID} = any(Guildid) order by score desc limit {n}";
+                using (var cmd = new NpgsqlCommand(sql_statement))
+                {
+                    cmd.Connection = conn;
+                    cmd.Prepare();
+                    cmd.ExecuteNonQuery();
+                    Loggers.log.Info(cmd.CommandText);
+                    resultMsg = $"```md\n#{GuildName} 서버 내 랭킹\n";
                     using (var reader = cmd.ExecuteReader())
                     {
                         int i = 1;

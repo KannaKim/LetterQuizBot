@@ -17,6 +17,14 @@ namespace LetterQuizBot.Modules
                 await ReplyAsync(DataStorage.GetTopnScoreInGuild(10, Context.Guild.Id,Context.Guild.Name));
         }
 
+        [Command("myleaderboard")]
+        [Alias("내순위")]
+        public async Task MyGuildRankIndividual()
+        {
+            if (Context.IsPrivate == false)
+                await ReplyAsync(DataStorage.GetMyScoreInGuild(5,Context.Guild.Id,Context.User.ToString(),Context.Guild.Name));
+        }
+
         [Command("서버랭킹")]
         public async Task GuildRanking()
         {
